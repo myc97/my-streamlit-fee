@@ -7,6 +7,9 @@ st.write("Upload your Excel file to automatically fetch fee details.")
 
 uploaded_file = st.file_uploader("🔼 Upload Your Input Excel File", type=["xlsx"])
 
+SHEET_ID = "1492402795"
+sheet_url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=xlsx"
+
 @st.cache_data
 def load_fee_table():
     return pd.read_excel("fee_table.xlsx")  # Master fee table in same folder
@@ -42,3 +45,4 @@ if uploaded_file:
     )
 else:
     st.warning("⚠️ Please upload your input file to begin.")
+
