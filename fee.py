@@ -7,8 +7,8 @@ st.write("Upload your Excel file to automatically fetch fee details.")
 
 uploaded_file = st.file_uploader("🔼 Upload Your Input Excel File", type=["xlsx"])
 
-SHEET_ID = "1492402795"
-sheet_url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=xlsx"
+SHEET_ID = "1XgbAQvoc8c2QPHx00t9L1iCSnvBbWg8JIPJlhrs7xZs"
+sheet_url = f"https://docs.google.com/spreadsheets/d/{1XgbAQvoc8c2QPHx00t9L1iCSnvBbWg8JIPJlhrs7xZs}/export?format=xlsx"
 
 @st.cache_data
 def load_fee_table():
@@ -45,5 +45,6 @@ if uploaded_file:
     )
 else:
     st.warning("⚠️ Please upload your input file to begin.")
+
 
 
