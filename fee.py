@@ -7,22 +7,21 @@ st.write("Upload your Excel file to automatically fetch fee details.")
 
 uploaded_file = st.file_uploader("🔼 Upload Your Input Excel File", type=["xlsx"])
 
+# Google Sheet export URL
 SHEET_ID = "1XgbAQvoc8c2QPHx00t9L1iCSnvBbWg8JIPJlhrs7xZs"
-sheet_url = f"https://docs.google.com/spreadsheets/d/{1XgbAQvoc8c2QPHx00t9L1iCSnvBbWg8JIPJlhrs7xZs}/export?format=xlsx"
+sheet_url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=xlsx"
 
 @st.cache_data
 def load_fee_table():
-    return pd.read_excel(sheet_url)  # Master fee table in same folder
+    return pd.read_excel(sheet_url)
 
 if uploaded_file:
     input_df = pd.read_excel(uploaded_file)
     fee_df = load_fee_table()
 
-    # Strip whitespace from headers (optional)
     input_df.columns = input_df.columns.str.strip()
     fee_df.columns = fee_df.columns.str.strip()
 
-    # Merge on State + Institute Name + Quota
     result = pd.merge(
         input_df,
         fee_df,
@@ -31,10 +30,10 @@ if uploaded_file:
     )
 
     st.success("✅ Fee details merged successfully!")
-    st.dataframe(result.head(15))  # Preview
+    st.dataframe(result.head(15))
 
     towrite = io.BytesIO()
-    result.to_excel(towrite, index=False, engine='openpyxl')
+    result.to_excel(towrite, index=False, engine="openpyxl")
     towrite.seek(0)
 
     st.download_button(
@@ -45,6 +44,3 @@ if uploaded_file:
     )
 else:
     st.warning("⚠️ Please upload your input file to begin.")
-
-
-
