@@ -12,7 +12,7 @@ sheet_url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=xl
 
 @st.cache_data
 def load_fee_table():
-    return pd.read_excel("fee_table.xlsx")  # Master fee table in same folder
+    return pd.read_excel(sheet_url)  # Master fee table in same folder
 
 if uploaded_file:
     input_df = pd.read_excel(uploaded_file)
@@ -45,4 +45,5 @@ if uploaded_file:
     )
 else:
     st.warning("⚠️ Please upload your input file to begin.")
+
 
